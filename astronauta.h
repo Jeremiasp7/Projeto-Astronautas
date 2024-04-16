@@ -8,7 +8,9 @@
 class astronauta {
     public:
         //Construtor da classe astronauta
-        astronauta(const std::string nome, int idade, const std::string situacao, const std::string cpf);
+        astronauta(const std::string& nome, int idade, const std::string& situacao, const std::string& cpf);
+
+        static std::vector<astronauta> astronautasCriados;
 
         //Getters 
         const std::string& getNome() const;
@@ -21,12 +23,9 @@ class astronauta {
         void setNome(const std::string& nome);
         void setIdade(int idade);
         void setSituacao(const std::string& situcao);
-        void setCpf(const std::string cpf);
-        void setVooParticipado(int codigoDeVoo);
-
-        //Métodos
-        void listarAstronautasMortos();
-        void cadastrarAstronauta();
+        void setCpf(const std::string& cpf);
+        static void setAstronautasCriados(astronauta astronautasCriados);
+        void adicionarVoosParticipados(int codigoDeVoo);     
         
     private:
         std::string nome ;
@@ -35,5 +34,8 @@ class astronauta {
         std::string cpf;
         std::vector<int> listaDeVoosParticipados;
 };
+//Métodos de controle dos astronautas
+void listarAstronautasMortos();
+void cadastrarAstronauta();
 
 #endif
