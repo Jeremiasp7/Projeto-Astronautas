@@ -94,21 +94,26 @@ void cadastrarAstronauta(){
             std::cout << "Nome inválido, digite novamente" << std::endl;
         }
     }
+
     std::cout << "Idade: ";
     std::cin >> idade;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //limpando o buffer após um getline
+    
     while (contador == 1) {
         std::cout << "Cpf: ";
-        std::cin >> cpf;
+        std::cin >> cpf; //FALTA VERIFICAR SE O CPF JÁ EXISTE
         if (verificandoApenasNumeros(cpf) && cpf.length() == 11) {
             contador = 0;
         } else {
             std::cout << "Cpf inválido, digite novamente" << std::endl;
         }
     }
-    astronauta astronauta(nome, idade, "disponivel", cpf);
+    
+    astronauta astronauta(nome, idade, "Disponível", cpf);
+
+    astronauta::setAstronautasCriados(astronauta);
 
     std::cout << "Astronauta cadastrado com sucesso!" << std::endl;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //limpando o buffer após um getline
 }
 
 void listarAstronautasMortos(){

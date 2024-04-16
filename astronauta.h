@@ -10,6 +10,7 @@ class astronauta {
         //Construtor da classe astronauta
         astronauta(const std::string& nome, int idade, const std::string& situacao, const std::string& cpf);
 
+        //Vetor de astronautas criados
         static std::vector<astronauta> astronautasCriados;
 
         //Getters 
