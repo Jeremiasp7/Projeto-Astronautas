@@ -60,17 +60,33 @@ void cadastrarVoo(){
 
     int contador = 0;
     int segundoContador = 0;
+    int contadorAlternativo = 0;
 
     std::cout << "Digite abaixo as informações do voo: " << std::endl;
-    while (contador == 0) { //FALTA VERIFICAR SE O VOO JÁ EXISTE
+    while (contador == 0) { 
         std::cout << "Código(3 números): ";
         std::cin >> codigoDoVoo;
+        if(voo::voosCriados.empty()) {
+            contadorAlternativo = 1;
+        } else {
+            for (voo& voo : voo::voosCriados) {
+                if (voo.getCodigoDeVoo() == codigoDoVoo) {
+                    std::cout << "Existe um voo com esse mesmo código. Digite novamente." << std::endl;
+                } else {
+                    contadorAlternativo = 1; 
+                }
+            }
+        }
         std::string intParaString = std::to_string(codigoDoVoo);
         if (intParaString.length() != 3) {
             std::cout << "Código inválido, digite novamente." << std::endl;
+            contadorAlternativo = 0;
         } else {
-            contador = 1;
+             if (contadorAlternativo == 1) {
+                contador = 1;
+             }
         }
+        
     }
     
     std::cout << "Informe quantos astronautas estarão no voo: ";
@@ -130,7 +146,7 @@ void lancarVoo() {
                 for (int i = 0; i < voos.getlistaDePassageiros().size(); i++) {
                     if (astro.getCpf() == voos.getlistaDePassageiros()[i]) {
                         if (astro.getSituacao() != "Disponível") {
-                            std::cout << "Esse voo não pode ser lançado pois o astronauta " << astro.getNome() << " está em outro voo." << std::endl;
+                            std::cout << "Esse voo não pode ser lançado pois o astronauta " << astro.getNome() << " está " << astro.getSituacao() << std::endl;
                             verificador = 1;
                         } 
                     }

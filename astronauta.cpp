@@ -97,14 +97,30 @@ void cadastrarAstronauta(){
 
     std::cout << "Idade: ";
     std::cin >> idade;
+
+    int contadorAlternativo = 0;
     
     while (contador == 1) {
         std::cout << "Cpf: ";
-        std::cin >> cpf; //FALTA VERIFICAR SE O CPF JÁ EXISTE
+        std::cin >> cpf; 
+        if (astronauta::astronautasCriados.empty()) {
+            contadorAlternativo = 1;
+        } else {
+            for (astronauta& astro : astronauta::astronautasCriados) {
+                if (astro.getCpf() == cpf) {
+                    std::cout << "Existe outro astronauta com o mesmo cpf, digite novamente." << std::endl;
+                } else {
+                    contadorAlternativo = 1;
+                }
+            }
+        }
         if (verificandoApenasNumeros(cpf) && cpf.length() == 11) {
-            contador = 0;
+            if (contadorAlternativo == 1) {
+                contador = 0;
+            }
         } else {
             std::cout << "Cpf inválido, digite novamente" << std::endl;
+            contadorAlternativo = 0;
         }
     }
     
