@@ -31,12 +31,14 @@ int main() {
             case 4:
                 //removerAstronauta()
             case 5:
-                //listarVoos()
+                listarTodosOsVoos();
+                break;
             case 6:
                 lancarVoo();
                 break;
             case 7:
-                //finalizarVoo()
+                finalizarVoo();
+                break;
             case 8:
                 explodirVoo();
                 break;
