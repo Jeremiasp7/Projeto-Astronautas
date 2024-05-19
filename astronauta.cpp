@@ -86,6 +86,7 @@ void cadastrarAstronauta(){
 
     std::cout << "Digite abaixo as informações do astronauta:" << std::endl;   
     while (contador == 0) {
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         std::cout << "Nome: ";
         std::getline(std::cin, nome);
         if (verificandoApenasLetras(nome)) {
@@ -135,7 +136,7 @@ void cadastrarAstronauta(){
 void listarAstronautasMortos(){
     int contador = 0;
     for (astronauta& astro : astronauta::astronautasCriados) {
-        if (astro.getSituacao() == "morto") {
+        if (astro.getSituacao() == "Morto") {
             contador+=1;
             std::cout << "Nome: " << astro.getNome() << std::endl;
             std::cout << "Cpf: " << astro.getCpf() << std::endl;
@@ -143,6 +144,7 @@ void listarAstronautasMortos(){
             for (int numeroDoVoo : astro.getVoosParticipados()) {
                 std::cout << "Voo: " << numeroDoVoo << std::endl;
             }
+           std::cout << " " << std::endl; 
         }
     }
 

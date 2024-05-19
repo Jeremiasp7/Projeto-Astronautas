@@ -196,6 +196,7 @@ void lancarVoo() {
                         for (int i = 0; i < voos.getlistaDePassageiros().size(); i++) {
                             if (astro.getCpf() == voos.getlistaDePassageiros()[i]) {
                                 astro.setSituacao("Voando");
+                                astro.adicionarVoosParticipados(codigoDoVoo);
                             }
                         }
                     }
@@ -210,16 +211,84 @@ void lancarVoo() {
 
 void explodirVoo() {
     int codigoDoVoo;
+    int contadorDeElementos = 0;
     int contador = 0;
+    int contadorDeCodigosDiferentes;
+    int contadorAlternativo;
+    bool existeVoo = true;
+    int elementos = voo::voosCriados.size();
 
-    while (contador == 0) {
-        std::cout << "Digite o código do voo que você quer explodir: ";
-        std::cin >> codigoDoVoo;
-        std::string intParaString = std::to_string(codigoDoVoo);
-        if (intParaString.length() != 3) {
-            std::cout << "Código inválido, digite novamente." << std::endl;
-        } else {
-            contador = 1;
-        }   
+    for (voo& voo : voo::voosCriados) {
+        if (voo.getSituacao() != "Voando") {
+            contadorDeElementos++;
+        }
     }
+    if (voo::voosCriados.empty() == true) {
+        std::cout << "Não existem voos para serem explodidos." << std::endl;
+        existeVoo = false;
+    } else if (contadorDeElementos == elementos) {
+        std::cout << "Não existem voos para serem explodidos." << std::endl;
+        existeVoo = false;
+    } else {
+        while (contador == 0) {
+        contadorDeCodigosDiferentes = 0;
+        contadorAlternativo = 0;
+        std::cout << "Digite o código do voo que você deseja explodir: ";
+        std::cin >> codigoDoVoo;
+            for (voo& voo : voo::voosCriados) {
+                if (codigoDoVoo == voo.getCodigoDeVoo()) {
+                    if (voo.getSituacao() != "Voando") {
+                        std::cout << "Esse voo está " << voo.getSituacao() << ", digite novamente." <<  std::endl;
+                    } else {
+                        contadorAlternativo = 1;
+                    }
+                } else {
+                    contadorDeCodigosDiferentes++;
+                }   
+            }
+            if (contadorDeCodigosDiferentes == elementos) {
+                std::cout << "Não existe nenhum voo com esse código, digite novamente." << std::endl;
+            }
+            std::string intParaString = std::to_string(codigoDoVoo);
+            if (intParaString.length() != 3) {
+                std::cout << "Código inválido, digite novamente." << std::endl;
+            } else {
+                if (contadorAlternativo == 1) {
+                    contador = 1;    
+                }
+            }
+        }
+    }
+
+    int verificador = 0;
+    if (existeVoo == true) {
+        for (voo& voos : voo::voosCriados) {
+            if (voos.getCodigoDeVoo() == codigoDoVoo) {
+                //Mudando a situação do astronauta
+                for (astronauta& astro : astronauta::astronautasCriados) {
+                    for (int i = 0; i < voos.getlistaDePassageiros().size(); i++) {
+                        if (astro.getCpf() == voos.getlistaDePassageiros()[i]) {
+                            if (astro.getSituacao() != "Voando") {
+                                std::cout << "Esse voo não pode ser lançado pois o astronauta " << astro.   getNome() << " está " << astro.getSituacao() << std::endl;
+                                verificador = 1;
+                            } 
+                        }
+                    }
+                }
+                if (verificador != 1) {
+                    for (astronauta& astro : astronauta::astronautasCriados) {
+                        for (int i = 0; i < voos.getlistaDePassageiros().size(); i++) {
+                            if (astro.getCpf() == voos.getlistaDePassageiros()[i]) {
+                                astro.setSituacao("Morto");
+                            }
+                        }
+                    }
+                    voos.setSituacao("Destruido");
+                    verificador = 2;
+                    std::cout << "Voo explodido com sucesso!" << std::endl;
+                } 
+            } 
+        }
+    }
+    
 }
