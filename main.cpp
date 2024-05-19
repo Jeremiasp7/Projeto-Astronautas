@@ -3,15 +3,11 @@
 #include "voo.h"
 
 int main() {
+    cadastrarAstronauta();
+    cadastrarVoo();
+    lancarVoo();
+    lancarVoo();
     
-    cadastrarAstronauta();
-    cadastrarAstronauta();
-
-    cadastrarVoo();
-    cadastrarVoo();
-
-    lancarVoo();
-    lancarVoo();
 
     return 0;
 }
