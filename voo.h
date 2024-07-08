@@ -15,12 +15,12 @@ class voo {
 
         //Getters
         int getCodigoDeVoo() const;
-        const std::vector<std::string>& getlistaDePassageiros() const;
+        std::vector<std::string>& getlistaDePassageiros();
         const std::string& getSituacao() const;
 
         //Setters
         void setCodigoDeVoo(int codigoDeVoo);
-        void setListaDePassageiros(const std::string cpfDoPassageiro);
+        void setListaDePassageiros(std::string cpfDoPassageiro);
         void setSituacao(const std::string situacao);
         static void setVoosCriados(voo voos);
 

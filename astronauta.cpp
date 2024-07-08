@@ -84,7 +84,7 @@ void cadastrarAstronauta(){
     
     int contador = 0;
 
-    std::cout << "Digite abaixo as informações do astronauta:" << std::endl;   
+    std::cout << "Digite abaixo as informacoes do astronauta:" << std::endl;   
     while (contador == 0) {
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         std::cout << "Nome: ";
@@ -92,7 +92,7 @@ void cadastrarAstronauta(){
         if (verificandoApenasLetras(nome)) {
             contador = 1;
         } else {
-            std::cout << "Nome inválido, digite novamente" << std::endl;
+            std::cout << "Nome invalido, digite novamente" << std::endl;
         }
     }
 

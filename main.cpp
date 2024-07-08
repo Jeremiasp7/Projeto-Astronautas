@@ -11,13 +11,13 @@ int main() {
     std::cout << "3 - Adicionar astronauta em um voo" << std::endl;
     std::cout << "4 - Remover astronauta de um voo" << std::endl;
     std::cout << "5 - Listar todos os voos" << std::endl;
-    std::cout << "6 - Lançar um voo" << std::endl;
+    std::cout << "6 - Lancar um voo" << std::endl;
     std::cout << "7 - Finalizar voo" << std::endl;
     std::cout << "8 - Explodir voo" << std::endl;
     std::cout << "9 - Listar os astronautas mortos" << std::endl;
-    std::cout << "0 - Encerrar aplicação" << std::endl;
+    std::cout << "0 - Encerrar aplicacao" << std::endl;
     while (booleano == false) {
-        std::cout << "Escolha um opção: ";
+        std::cout << "Escolha um opcao: ";
         std::cin >> opcao;
         switch (opcao) {
             case 1:
@@ -27,9 +27,11 @@ int main() {
                 cadastrarVoo();
                 break;
             case 3:
-                //adicionarAstronauta()
+                adicionarAstronautaEmVoo();
+                break;
             case 4:
-                //removerAstronauta()
+                removerAstronautaDeVoo();
+                break;
             case 5:
                 listarTodosOsVoos();
                 break;
@@ -46,11 +48,11 @@ int main() {
                 listarAstronautasMortos();
                 break;
             case 0:
-                std::cout << "Aplicação encerrada!" << std::endl;
+                std::cout << "Aplicacao encerrada!" << std::endl;
                 booleano = true;
                 break;
             default:
-                std::cout << "Opção inválida!" <<std::endl;
+                std::cout << "Opcao invalida!" <<std::endl;
                 break;
         }
     }
