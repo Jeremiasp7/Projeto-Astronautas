@@ -65,7 +65,7 @@ void cadastrarVoo() {
 
     std::cout << "Digite abaixo as informacoes do voo: " << std::endl;
     while (contador == 0) { 
-        std::cout << "Codigo(3 números): ";
+        std::cout << "Codigo(3 numeros): ";
         std::cin >> codigoDoVoo;
         if(voo::voosCriados.empty()) {
             contadorAlternativo = 1;
@@ -146,10 +146,10 @@ void lancarVoo() {
         existeVoo = false;
     } else {
         while (contador == 0) {
-        contadorDeCodigosDiferentes = 0;
-        contadorAlternativo = 0;
-        std::cout << "Digite o codigo do voo que voce deseja lancar: ";
-        std::cin >> codigoDoVoo;
+            contadorDeCodigosDiferentes = 0;
+            contadorAlternativo = 0;
+            std::cout << "Digite o codigo do voo que voce deseja lancar: ";
+            std::cin >> codigoDoVoo;
             for (voo& voo : voo::voosCriados) {
                 if (codigoDoVoo == voo.getCodigoDeVoo()) {
                     if (voo.getSituacao() != "Em planejamento") {
@@ -159,7 +159,7 @@ void lancarVoo() {
                     }
                 } else {
                     contadorDeCodigosDiferentes++;
-                }   
+                }
             }
             if (contadorDeCodigosDiferentes == elementos) {
                 std::cout << "Nao existe nenhum voo com esse codigo, digite novamente." << std::endl;
@@ -169,26 +169,29 @@ void lancarVoo() {
                 std::cout << "Codigo invalido, digite novamente." << std::endl;
             } else {
                 if (contadorAlternativo == 1) {
-                    contador = 1;    
+                    contador = 1;
                 }
             }
         }
     }
 
-    
-
     int verificador = 0;
     if (existeVoo == true) {
         for (voo& voos : voo::voosCriados) {
             if (voos.getCodigoDeVoo() == codigoDoVoo) {
-                //Mudando a situação do astronauta
+                // Verifica se há passageiros no voo
+                if (voos.getlistaDePassageiros().empty()) {
+                    std::cout << "Esse voo nao pode ser lancado pois nao ha astronautas nele." << std::endl;
+                    return; // Sai da função se não houver astronautas no voo
+                }
+                // Mudando a situação do astronauta
                 for (astronauta& astro : astronauta::astronautasCriados) {
                     for (int i = 0; i < voos.getlistaDePassageiros().size(); i++) {
                         if (astro.getCpf() == voos.getlistaDePassageiros()[i]) {
                             if (astro.getSituacao() != "Disponível") {
-                                std::cout << "Esse voo nao pode ser lancado pois o astronauta " << astro.   getNome() << " esta " << astro.getSituacao() << std::endl;
+                                std::cout << "Esse voo nao pode ser lancado pois o astronauta " << astro.getNome() << " esta " << astro.getSituacao() << std::endl;
                                 verificador = 1;
-                            } 
+                            }
                         }
                     }
                 }
@@ -204,11 +207,12 @@ void lancarVoo() {
                     voos.setSituacao("Voando");
                     verificador = 2;
                     std::cout << "Voo lancado com sucesso!" << std::endl;
-                } 
-            } 
+                }
+            }
         }
-    } 
+    }
 }
+
 
 void explodirVoo() {
     int codigoDoVoo;
